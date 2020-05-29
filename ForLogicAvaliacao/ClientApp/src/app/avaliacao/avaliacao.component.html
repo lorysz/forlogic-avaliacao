@@ -1,0 +1,28 @@
+<button type="submit" style="float: right;" (click)="novo()">Nova Avaliação</button>
+<br />
+<br />
+<form [formGroup]="frmFiltro">
+    <label for="nota">Nota</label>
+    <input type="text" class="form-control" id="nota" formControlName="nota">
+</form>
+
+<table class="table" style="margin-top: 15px;">
+    <thead>
+        <tr>
+            <th scope="col" style="width: 30%;">Mês</th>
+            <th scope="col" style="width: 30%;">Ano</th>
+            <th scope="col" style="width: 30%;">Nota</th>
+            <th scope="col">Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let avaliacao of avaliacoesFiltradas">
+            <td>{{avaliacao.mes}}</td>  
+            <td>{{avaliacao.ano}}</td>
+            <td [style.color]="avaliacao.nota >= 80 ? 'green' : avaliacao.nota < 60 ? 'Red' : 'orange'">{{avaliacao.nota}}</td>
+            <td>
+                <button (click)="visualizar(avaliacao.idAvaliacao)">Visualizar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

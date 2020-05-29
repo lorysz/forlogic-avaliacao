@@ -1,0 +1,15 @@
+<form [formGroup]="formCliente">
+    <div class="form-group">
+        <label class="required" for="razaoSocial">Razão Social ou Nome Fantasia</label>
+        <input type="text" class="form-control" id="razaoSocial" formControlName="razaoSocial">
+    </div>
+    <div class="form-group">
+        <label class="required" for="nomeResponsavel">Nome para Contato</label>
+        <input type="text" class="form-control" id="nomeResponsavel" formControlName="nomeResponsavel">
+    </div>
+    <div class="form-group">
+        <label for="cnpj">Cnpj</label>
+        <input type="text" class="form-control" id="cnpj" formControlName="cnpj">
+    </div>
+    <button [disabled]="formCliente.invalid || cnpjExistente" type="submit" class="btn btn-primary mb-2" (click)="salvar()">Salvar</button>
+</form>

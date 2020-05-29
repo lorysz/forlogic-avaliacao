@@ -1,0 +1,5 @@
+<div *ngIf="dadosHome">
+  <p>Avaliação feita neste mês: {{dadosHome.avaliadoMes}}</p>
+  <p>Quantidade de clientes avaliados neste mês: {{dadosHome.quantidadeClientesAvaliadosMes}}</p>
+  <p [style.color]="dadosHome.notaGeralMes >= 80 ? 'green' : dadosHome.notaGeralMes < 60 ? 'Red' : 'orange'">Nota geral do mês: {{dadosHome.notaGeralMes}}</p>
+</div>

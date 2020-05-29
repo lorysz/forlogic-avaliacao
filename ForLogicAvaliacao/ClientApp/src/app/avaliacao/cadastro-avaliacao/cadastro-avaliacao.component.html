@@ -1,0 +1,66 @@
+<button *ngIf="pagina === 2" type="submit" class="btn btn-primary mb-2"
+        (click)="voltar()">Voltar</button>
+<form *ngIf="pagina === 1" [formGroup]="formAvaliacao">
+    <div class="form-group" style="border: 1px solid #999">
+        <div class="row" style="margin: 15px;">
+            <div class="col-sm">
+                <label class="required" for="mes">Mês Referência</label>
+                <input type="text" class="form-control" id="mes" formControlName="mes">
+            </div>
+            <div class="col-sm">
+                <label class="required" for="ano">Ano Referência</label>
+                <input type="text" class="form-control" id="ano" formControlName="ano">
+            </div>
+        </div>
+    </div>
+    <button [disabled]="formAvaliacao.invalid" type="submit" class="btn btn-primary mb-2"
+        (click)="salvarDadosAvaliacao()">Prosseguir</button>
+</form>
+<form *ngIf="pagina === 2" [formGroup]="formRespostaAvaliacao">
+    <div class="form-group">
+        <label class="required" for="cliente">Cliente</label>
+        <select class="form-control" id="cliente" formControlName="cliente">
+            <option value=""> </option>
+            <option *ngFor="let cliente of clientes" value="{{cliente.idCliente}}">{{cliente.descricaoCombo}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="required" for="nota">Qual a probabilidade de você recomendar nosso produto/serviço a um amigo/conhecido?</label>
+        <input type="text" class="form-control" id="nota" formControlName="nota">
+    </div>
+
+    <div class="form-group">
+        <label class="required" for="motivo">Motivo da Nota/Avaliação</label>
+        <input type="text" class="form-control" id="motivo" formControlName="motivo">
+    </div>
+
+    <button [disabled]="formRespostaAvaliacao.invalid" type="submit" class="btn btn-primary mb-2"
+        (click)="adicionar()">Adicionar</button>
+</form>
+
+<p *ngIf="clientesAvaliados.length <= 0 && pagina === 2">Nenhum cliente foi adicionado na avaliação</p>
+
+<p *ngIf="clientesAvaliados.length > 0" [style.color]="mediaGeral >= 80 ? 'green' : mediaGeral < 60 ? 'Red' : 'orange'">A nota geral é de: {{mediaGeral}}</p>
+
+<table *ngIf="clientesAvaliados.length > 0" class="table" style="margin-top: 15px;">
+    <thead>
+        <tr>
+            <th scope="col" style="width: 30%;">Cliente</th>
+            <th scope="col" style="width: 30%;">Nota</th>
+            <th scope="col" style="width: 30%;">Motivo</th>
+            <th scope="col" style="width: 30%;">Avaliação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let avaliacao of clientesAvaliados">
+            <td>{{avaliacao.cliente.nomeResponsavel}}</td>  
+            <td>{{avaliacao.nota}}</td>
+            <td>{{avaliacao.motivo}}</td>
+            <td>{{avaliacao.resultadoAvaliacao}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<button *ngIf="clientesAvaliados.length > 0" [disabled]="clientesAvaliados.length <= 0" type="submit"
+    class="btn btn-success mb-2" (click)="salvar()">Salvar</button>
