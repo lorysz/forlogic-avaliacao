@@ -6,7 +6,7 @@ Requisito mínimo:
 - Angular 8+
 
 Rodar as migrations do projeto de infra:
-donet ef database update
+dotnet ef database update
 
 Login: adm@adm.com.br
 Senha: 123
